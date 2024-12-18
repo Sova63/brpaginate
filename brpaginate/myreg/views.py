@@ -1,12 +1,12 @@
 from django.contrib.auth import get_user_model, authenticate,login,logout
 from django.urls import reverse_lazy,reverse
 from django.views.generic import FormView, RedirectView
-from .forms import UserForm,LoginForm
+from .forms import registerForm,LoginForm
 
 
 class register(FormView):
     template_name = 'myreg/register.html'
-    form_class = UserForm
+    form_class = registerForm
     success_url = reverse_lazy('article_list')
 
     def form_valid(self, form):
@@ -28,7 +28,6 @@ class loginView(FormView):
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
         user = authenticate(self.request, username=username, password=password)
-        print(user)
         if user is not None:
             login(self.request, user)
             return super().form_valid(form)
