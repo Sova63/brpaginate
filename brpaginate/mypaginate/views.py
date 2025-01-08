@@ -8,11 +8,19 @@ from .models import Article
     articles = Article.objects.all()
     return render(request, 'articles/article_list.html', {'articles': articles})'''
 
-def article_list(request):
+'''def article_list(request):
     articles = Article.objects.all()
     paginator = Paginator(articles, 6)  # Показывать 10 статей на странице
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    return render(request, 'articles/article_list.html', {'page_obj': page_obj})'''
+
+
+def article_list(request):
+    articles = Article.objects.all()
+    paginator = Paginator(articles, 6) # Показывать 6 статей на странице
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number) #if page_number else paginator.get_page(1)
     return render(request, 'articles/article_list.html', {'page_obj': page_obj})
 
 
