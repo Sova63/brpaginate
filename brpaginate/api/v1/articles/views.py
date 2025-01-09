@@ -1,11 +1,13 @@
-from django.views import View
-from django.http import JsonResponse
 from mypaginate.models import Article
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from api.v1.articles.serializer import ArticlesListSerializer, ArticlesDetailSerializer
 
-from api.v1.articles.serializer import ArticlesListSerializer
 
-
-class ArticlesApiView(ListAPIView):
+class ArticlesApiListView(ListAPIView):
 	serializer_class = ArticlesListSerializer
+	queryset = Article.objects.all()
+
+
+class ArticlesDetailView(RetrieveAPIView):
+	serializer_class = ArticlesDetailSerializer
 	queryset = Article.objects.all()
