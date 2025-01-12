@@ -15,8 +15,8 @@ class Article(models.Model):
 
 
 class Comment(models.Model):
-    article = models.ForeignKey('mypaginate.Article',related_name='comment',on_delete=models.CASCADE)
-    user = models.ForeignKey('myusers.User', related_name='comment',on_delete=models.SET_NULL, null=True, blank=True)
+    article = models.ForeignKey('mypaginate.Article',related_name='comments',on_delete=models.CASCADE)
+    user = models.ForeignKey('myusers.User', related_name='comments',on_delete=models.SET_NULL, null=True, blank=True)
     is_anon = models.BooleanField(default=False)
     text = models.TextField('Текст коментария')
 

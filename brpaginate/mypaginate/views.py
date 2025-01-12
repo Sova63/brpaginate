@@ -8,7 +8,7 @@ from .services import get_comments_for_article
 
 def article_list(request):
     articles = Article.objects.all()
-    paginator = Paginator(articles, 4) # Показывать 6 статей на странице
+    paginator = Paginator(articles, 4) # Показывать 4 статей на странице
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number) #if page_number else paginator.get_page(1)
     return render(request, 'articles/article_list.html', {'page_obj': page_obj})
@@ -16,8 +16,8 @@ def article_list(request):
 class ArticleListView(ListView):
     model = Article
     template_name = 'article_list.html'
-    context_object_name = 'news'
-    paginate_by = 4  # Показывать 10 статей на странице
+    context_object_name = 'articles'
+    paginate_by = 4  # Показывать 4 статей на странице
 
 
 def article_detail(request, pk):
