@@ -1,5 +1,8 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from mypaginate.models import Article, Comment
+from rest_framework.fields import CurrentUserDefault
+from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import ModelSerializer
 
 
@@ -13,6 +16,7 @@ class ArticlesListSerializer(serializers.ModelSerializer):
 		)
 
 class CommentSerializer(serializers.ModelSerializer):
+	user = PrimaryKeyRelatedField(queryset=get_user_model().objects.all(),default=CurrentUserDefault())
 	class Meta:
 		model = Comment
 		fields = (
