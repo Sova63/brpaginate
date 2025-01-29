@@ -8,6 +8,7 @@ from api.v1.users.serializers import ObtainTokenSerializer
 class ObtainTokenApi(APIView):
 	serializer_class = ObtainTokenSerializer
 
+
 	def post(self, request):
 		serializer = self.serializer_class(data=request.data)
 		serializer.is_valid(raise_exception=True)
